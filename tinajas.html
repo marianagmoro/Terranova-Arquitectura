@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tinajas - TerraNova Arquitectura</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body class="project-page">
+    <header class="project-header-bar">
+      <div class="project-header-inner">
+        <div class="home-logo">
+          <a href="index.html">
+            <img
+              src="assets/img/ui/terranova2.png"
+              alt="Terranova Arquitectura"
+              class="home-brand-logo"
+            />
+          </a>
+        </div>
+
+        <nav class="home-nav">
+          <a href="proyectos.html" class="nav-link">proyectos</a>
+          <a href="estudio.html" class="nav-link">estudio</a>
+          <a href="contacto.html" class="nav-link">contacto</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="projects-label">
+      <span class="projects-text">Tinajas</span>
+      <span class="project-title-meta">A Coruña · 2023</span>
+    </div>
+
+    <div class="project-description">
+      <p class="project-text">
+        Reforma de local con enfoque funcional, identidad sobria y soluciones de almacenamiento integradas.
+      </p>
+    </div>
+
+    <div class="project-gallery">
+      <div class="project-image-large">
+        <img
+          src="assets/img/proyectos/tinajas/portada.png"
+          alt="Tinajas"
+          class="project-image"
+        />
+      </div>
+      <div class="project-image-small">
+        <img
+          src="assets/img/proyectos/tinajas/portada.png"
+          alt="Tinajas - Interior"
+          class="project-image"
+        />
+      </div>
+    </div>
+  </body>
+  <script>
+    // Convertir scroll vertical en horizontal para elementos debajo de la línea
+    document.addEventListener("wheel", function (e) {
+      const lineHeight = window.innerHeight * 0.33 + 64; // 33vh + 4rem
+      if (e.clientY > lineHeight) {
+        e.preventDefault();
+        window.scrollBy(e.deltaY, 0);
+      }
+    }, { passive: false });
+    function fitProjectPair() {
+      const gallery = document.querySelector(".project-gallery");
+      const largeImage = document.querySelector(".project-image-large .project-image");
+      const smallImage = document.querySelector(".project-image-small .project-image");
+
+      if (!gallery || !largeImage || !smallImage) {
+        return;
+      }
+
+      const r1 = largeImage.naturalWidth / largeImage.naturalHeight;
+      const r2 = smallImage.naturalWidth / smallImage.naturalHeight;
+      if (!isFinite(r1) || !isFinite(r2) || r1 <= 0 || r2 <= 0) {
+        return;
+      }
+
+      const styles = window.getComputedStyle(gallery);
+      const gap = parseFloat(styles.columnGap || styles.gap || "16") || 16;
+      const availableWidth = gallery.clientWidth;
+      const availableHeight = gallery.clientHeight;
+
+      if (!availableWidth || !availableHeight) {
+        return;
+      }
+
+      const idealHeight = (availableWidth - gap) / (r1 + r2);
+      const fittedHeight = Math.min(idealHeight, availableHeight);
+      gallery.style.setProperty("--pair-height", `${fittedHeight}px`);
+    }
+
+    function initProjectPairFit() {
+      const images = Array.from(document.querySelectorAll(".project-gallery .project-image"));
+      if (!images.length) {
+        return;
+      }
+
+      let pending = images.length;
+      const done = () => {
+        pending -= 1;
+        if (pending <= 0) {
+          fitProjectPair();
+        }
+      };
+
+      images.forEach((img) => {
+        if (img.complete && img.naturalWidth > 0) {
+          done();
+        } else {
+          img.addEventListener("load", done, { once: true });
+          img.addEventListener("error", done, { once: true });
+        }
+      });
+
+      window.addEventListener("resize", fitProjectPair);
+      window.addEventListener("load", fitProjectPair);
+    }
+
+    initProjectPairFit();
+  </script>
+</html>
+
+

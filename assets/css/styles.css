@@ -1,0 +1,961 @@
+/* Reset y configuración base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: "Arial", sans-serif;
+  line-height: 1.6;
+  color: #333;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+/* Variables CSS */
+:root {
+  --primary-color: #1a1a1a;
+  --secondary-color: #f5f5f5;
+  --accent-color: #c9a96e;
+  --text-light: #666;
+  --white: #ffffff;
+  --transition: all 0.3s ease;
+}
+
+/* ==================== COVER PAGE ==================== */
+.cover-page {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.cover-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cover-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../img/ui/maestroclave.jpg") center center/cover no-repeat;
+  transform: scaleX(-1);
+}
+
+.background-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.cover-content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--white);
+  padding: 2rem;
+}
+
+.cover-header {
+  align-self: flex-start;
+  margin-top: 5rem;
+  margin-left: 2rem;
+}
+
+.brand-logo {
+  max-width: 250px;
+  max-height: 100px;
+  height: auto;
+  opacity: 0;
+  animation: fadeInUp 1.5s ease 0.5s forwards;
+}
+
+.enter-section {
+  align-self: flex-end;
+  margin-top: 5rem;
+  opacity: 0;
+  animation: fadeInUp 1.5s ease 1.5s forwards;
+}
+
+.enter-button {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--white);
+  padding: 1rem 2rem;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 40px;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.1);
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.enter-button:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #000000;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.enter-text {
+  font-family: "Arial", sans-serif;
+  font-size: 0.9rem;
+  font-weight: bold;
+  letter-spacing: 0.2em;
+  position: relative;
+  z-index: 2;
+}
+
+.button-line {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: var(--white);
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+
+.enter-button:hover .button-line {
+  width: 0;
+}
+
+.enter-button:hover .enter-text {
+  color: #000000;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==================== HOME PAGE ==================== */
+.home-page {
+  font-family: "Arial", sans-serif;
+  background: #e5e4e4;
+  min-height: 100vh;
+  position: relative;
+}
+
+.home-logo {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  z-index: 1000;
+}
+
+.home-brand-logo {
+  max-width: 150px;
+  max-height: 60px;
+  height: auto;
+}
+
+.home-nav {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  z-index: 1000;
+  display: flex;
+  gap: 2rem;
+}
+
+.horizontal-line {
+  position: absolute;
+  top: 33vh;
+  left: 2rem;
+  right: 2rem;
+  height: 1px;
+  background: #333;
+  z-index: 1001;
+}
+
+.projects-label {
+  position: absolute;
+  top: calc(33vh + 4rem);
+  left: 2rem;
+  z-index: 1000;
+}
+
+.project-title-meta {
+  display: block;
+  margin-top: 0.35rem;
+  font-family: "Arial", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: #5a5a5a;
+}
+
+.projects-text {
+  color: #333;
+  text-decoration: none;
+  font-family: "Arial", sans-serif;
+  font-weight: bold;
+  font-size: 0.9rem;
+  letter-spacing: -0.02em;
+}
+
+.scroll-arrow {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 1000;
+  width: 2rem;
+  height: 2rem;
+  color: #333;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease;
+  pointer-events: none;
+}
+
+.scroll-arrow.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.scroll-arrow:hover {
+  color: #000;
+  transform: translateY(3px);
+}
+
+.scroll-arrow svg {
+  width: 100%;
+  height: 100%;
+}
+
+.years-column {
+  position: absolute;
+  top: calc(33vh + 6rem);
+  left: 2rem;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.year-link {
+  color: #333;
+  text-decoration: none;
+  font-family: "Arial", sans-serif;
+  font-weight: normal;
+  font-size: 0.9rem;
+  letter-spacing: -0.02em;
+  transition: color 0.3s ease;
+}
+
+.year-link:hover {
+  color: #666;
+}
+
+.year-link.active {
+  color: #333;
+  font-weight: bold;
+}
+
+.nav-link {
+  color: #333;
+  text-decoration: none;
+  font-family: "Arial", sans-serif;
+  font-weight: normal;
+  font-size: 0.9rem;
+  letter-spacing: -0.02em;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #666;
+}
+
+.gallery {
+  position: absolute;
+  top: calc(33vh + 4rem);
+  left: calc(25vw + 2rem);
+  right: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding-bottom: 4rem;
+}
+
+.gallery-item {
+  aspect-ratio: 1080/1350;
+  overflow: hidden;
+  position: relative;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+.gallery-item.filter-exit {
+  opacity: 0;
+  transform: translateY(8px) scale(0.98);
+}
+
+.gallery-item.filter-enter {
+  opacity: 0;
+  transform: translateY(8px) scale(0.98);
+}
+
+.project-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+.project-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 1rem;
+}
+
+.gallery-item:hover .project-overlay {
+  opacity: 1;
+}
+
+.project-info {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-areas:
+    "name name"
+    "location year";
+  align-items: baseline;
+  column-gap: 0.35rem;
+  row-gap: 0.2rem;
+  text-align: center;
+}
+
+.project-name {
+  grid-area: name;
+  color: #111;
+  font-family: "Arial", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.project-location {
+  grid-area: location;
+  color: #555;
+  font-family: "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.project-year {
+  grid-area: year;
+  color: #888;
+  font-family: "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+}
+
+.project-year::before {
+  content: "·";
+  margin-right: 0.35rem;
+  color: #777;
+}
+
+.main-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  padding: 1rem 0;
+  transition: var(--transition);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--primary-color);
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: var(--primary-color);
+  font-weight: 300;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  transition: var(--transition);
+  position: relative;
+}
+
+.nav-menu a:hover {
+  color: var(--accent-color);
+}
+
+.nav-menu a::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent-color);
+  transition: width 0.3s ease;
+}
+
+.nav-menu a:hover::after {
+  width: 100%;
+}
+
+.main-content {
+  padding-top: 80px;
+}
+
+.hero-section {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="%23f5f5f5" points="0,0 1000,300 1000,1000 0,700"/></svg>');
+  background-size: cover;
+  background-position: center;
+  color: var(--white);
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 800px;
+  padding: 0 2rem;
+}
+
+.hero-title {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 300;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  font-weight: 300;
+  opacity: 0.9;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section-title {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--primary-color);
+}
+
+.projects-section {
+  padding: 6rem 0;
+  background: var(--secondary-color);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 3rem;
+}
+
+.project-card {
+  background: var(--white);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: var(--transition);
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.project-image {
+  height: 250px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 0.9rem;
+}
+
+.project-card h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: 1.5rem 1.5rem 0.5rem;
+  color: var(--primary-color);
+}
+
+.project-card p {
+  color: var(--text-light);
+  margin: 0 1.5rem 1.5rem;
+  line-height: 1.6;
+}
+
+.about-section {
+  padding: 6rem 0;
+  text-align: center;
+}
+
+.about-text {
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  color: var(--text-light);
+  line-height: 1.8;
+}
+
+.contact-section {
+  padding: 6rem 0;
+  background: var(--primary-color);
+  color: var(--white);
+  text-align: center;
+}
+
+.contact-section .section-title {
+  color: var(--white);
+}
+
+.contact-info p {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-menu {
+    gap: 1rem;
+  }
+
+  .nav-menu a {
+    font-size: 0.8rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .hero-section {
+    height: 70vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-container {
+    padding: 0 1rem;
+  }
+
+  .brand-name {
+    font-size: 2.5rem;
+  }
+
+  .brand-subtitle {
+    font-size: 0.8rem;
+  }
+}
+
+/* ==================== PROJECT PAGES ==================== */
+.project-page {
+  background: #e5e4e4;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 300vw;
+}
+
+.project-page .home-logo,
+.project-page .home-nav,
+.project-page .horizontal-line {
+  position: fixed;
+  z-index: 2000;
+}
+
+.projects-label {
+  position: absolute;
+  top: calc(33vh + 4rem);
+  left: 2rem;
+  z-index: 1000;
+}
+
+.project-description {
+  position: fixed;
+  top: calc(33vh + 7.4rem);
+  left: 2rem;
+  width: calc(25vw - 2rem);
+  z-index: 10;
+}
+
+.project-text {
+  font-family: "Arial", sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 300 !important;
+  line-height: 1.2 !important;
+  color: #333 !important;
+  margin: 0 !important;
+  text-align: justify !important;
+}
+
+.project-gallery {
+  position: absolute;
+  top: calc(33vh + 4rem);
+  left: calc(25vw + 2rem);
+  right: 2rem;
+  bottom: 4rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+}
+
+.project-image-large,
+.project-image-small {
+  overflow: hidden;
+  position: relative;
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-text {
+  font-family: "Arial", sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 300 !important;
+  line-height: 1.2 !important;
+  color: #333 !important;
+  margin: 0 !important;
+  text-align: justify !important;
+}
+
+.back-link {
+  color: #333;
+  text-decoration: none;
+  font-family: "Arial", sans-serif;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.back-link:hover {
+  color: #666;
+}
+
+.project-content {
+  padding-top: 180px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 4rem;
+}
+
+/* Estilos para layout tipo home */
+.project-description {
+  position: absolute;
+  top: calc(33vh + 7.4rem);
+  left: 2rem;
+  width: calc(25vw - 2rem);
+  z-index: 10;
+}
+
+.project-text {
+  font-family: "Arial", sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 300 !important;
+  line-height: 1.2 !important;
+  color: #333 !important;
+  margin: 0 !important;
+  text-align: justify !important;
+}
+
+.project-gallery {
+  position: absolute;
+  top: calc(33vh + 4rem);
+  left: calc(25vw + 2rem);
+  right: 2rem;
+  bottom: 4rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+}
+
+.project-image-large,
+.project-image-small {
+  overflow: hidden;
+  position: relative;
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.project-title {
+  font-family: "Arial", sans-serif;
+  font-size: 3rem;
+  font-weight: 300;
+  color: #333;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.project-meta {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  font-family: "Arial", sans-serif;
+  color: #666;
+  font-size: 1rem;
+}
+
+.project-year,
+.project-location {
+  font-weight: 500;
+}
+
+.project-image-hero {
+  margin-bottom: 4rem;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 70vh;
+  object-fit: cover;
+}
+
+.project-details {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.project-description h2 {
+  font-family: "Arial", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.project-description p {
+  font-family: "Arial", sans-serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+.project-specs {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.project-specs h3 {
+  font-family: "Arial", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.project-specs ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.project-specs li {
+  font-family: "Arial", sans-serif;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid #eee;
+}
+
+.project-specs li:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.project-specs li strong {
+  color: #333;
+  font-weight: 600;
+}
+
+/* Responsive para páginas de proyecto */
+@media (max-width: 768px) {
+  .project-description {
+    position: static;
+    width: auto;
+    padding: 0 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .project-gallery {
+    top: calc(33vh + 8rem);
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: 2fr 1fr;
+  }
+}
+
+/* Estructura semantica para paginas de proyecto */
+.project-header-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 33vh;
+  background: #e5e4e4;
+  z-index: 2000;
+}
+
+.project-header-inner {
+  position: relative;
+  height: 100%;
+  padding: 2rem 2rem 1.5rem;
+}
+
+.project-header-inner::after {
+  content: "";
+  position: absolute;
+  left: 2rem;
+  right: 2rem;
+  bottom: 0;
+  height: 1px;
+  background: #8f8f8f;
+}
+
+.project-page .home-logo {
+  position: static;
+  z-index: auto;
+}
+
+.project-page .home-nav {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  z-index: auto;
+}
+
+.project-page .horizontal-line {
+  display: none;
+}
+
+.project-page .projects-label {
+  top: calc(33vh + 4rem);
+}
