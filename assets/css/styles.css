@@ -335,7 +335,7 @@ body {
 }
 
 .gallery-item {
-  height: calc(62vh - 4rem);
+  aspect-ratio: 1080/1350;
   overflow: hidden;
   position: relative;
   opacity: 1;
