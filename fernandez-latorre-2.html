@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -56,12 +56,27 @@
     </div>
   <script>
     // Convertir scroll vertical en horizontal para elementos debajo de la línea
+    const projectDescription = document.querySelector(".project-description");
+
     document.addEventListener("wheel", function (e) {
       const lineHeight = window.innerHeight * 0.33 + 64; // 33vh + 4rem
-      if (e.clientY > lineHeight) {
-        e.preventDefault();
-        window.scrollBy(e.deltaY, 0);
+      const isBelowHeader = e.clientY > lineHeight;
+
+      if (!isBelowHeader) {
+        return;
       }
+
+      if (projectDescription && projectDescription.contains(e.target)) {
+        const canScrollDown = projectDescription.scrollTop + projectDescription.clientHeight < projectDescription.scrollHeight;
+        const canScrollUp = projectDescription.scrollTop > 0;
+
+        if ((e.deltaY > 0 && canScrollDown) || (e.deltaY < 0 && canScrollUp)) {
+          return;
+        }
+      }
+
+      e.preventDefault();
+      window.scrollBy(e.deltaY, 0);
     }, { passive: false });
     function fitProjectPair() {
       const gallery = document.querySelector(".project-gallery");

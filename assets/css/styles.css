@@ -551,8 +551,12 @@ body {
 .project-description {
   position: absolute;
   top: calc(33vh + 8.25rem);
+  bottom: 4rem;
   left: 2rem;
   width: calc(25vw - 2rem);
+  overflow-y: auto;
+  padding-right: 0.35rem;
+  -webkit-overflow-scrolling: touch;
   z-index: 10;
 }
 
@@ -594,6 +598,8 @@ body {
     position: static;
     width: auto;
     padding: 0 1rem;
+    max-height: none;
+    overflow: visible;
     margin-bottom: 2rem;
   }
 

@@ -34,7 +34,15 @@
 
     <div class="project-description">
       <p class="project-text">
-        Rehabilitación de vivienda con nueva organización funcional y selección de materiales atemporales.
+        Rehabilitación integral de vivienda en la que se replantea por completo la distribución interior para mejorar la entrada de luz natural, la continuidad visual entre estancias y la flexibilidad de uso en el día a día. El proyecto parte de una lectura minuciosa del estado previo, identificando puntos de estrangulamiento en circulación, falta de almacenamiento útil y una relación poco eficiente entre piezas principales como cocina, salón y zonas de transición.
+
+        La intervención propone una nueva organización funcional basada en recorridos más claros, vistas cruzadas y una jerarquía espacial más legible, donde cada ambiente mantiene su carácter sin perder conexión con el resto. Se trabaja con una paleta de materiales atemporales que combina superficies cálidas, texturas neutras y acabados de alta resistencia para garantizar durabilidad, fácil mantenimiento y coherencia estética en toda la vivienda.
+
+        En paralelo, se optimizan instalaciones y envolvente interior para mejorar confort térmico y acústico, incorporando soluciones discretas que no alteran la limpieza formal del conjunto. La iluminación se diseña por capas, combinando luz ambiental, puntual y de acento para acompañar distintos momentos de uso, reforzar la percepción de amplitud y poner en valor elementos arquitectónicos concretos.
+
+        Especial atención se dedica al mobiliario integrado y a la gestión del almacenamiento, resolviendo necesidades reales de uso sin sobrecargar visualmente los espacios. Esta estrategia permite liberar superficie útil, ordenar la vida cotidiana y mantener una imagen serena y continua. El resultado es una vivienda más luminosa, funcional y equilibrada, con una identidad contemporánea sobria y una respuesta precisa a los hábitos de sus usuarios.
+
+        Además, se ajustan proporciones, encuentros y detalles constructivos para conseguir una lectura unitaria en todo el proyecto, cuidando la transición entre materiales y el comportamiento de la luz sobre cada plano. De este modo, la reforma no solo moderniza la vivienda, sino que mejora su rendimiento espacial a largo plazo y su capacidad de adaptación ante nuevas formas de habitar.
       </p>
     </div>
 
@@ -56,12 +64,27 @@
     </div>
   <script>
     // Convertir scroll vertical en horizontal para elementos debajo de la línea
+    const projectDescription = document.querySelector(".project-description");
+
     document.addEventListener("wheel", function (e) {
       const lineHeight = window.innerHeight * 0.33 + 64; // 33vh + 4rem
-      if (e.clientY > lineHeight) {
-        e.preventDefault();
-        window.scrollBy(e.deltaY, 0);
+      const isBelowHeader = e.clientY > lineHeight;
+
+      if (!isBelowHeader) {
+        return;
       }
+
+      if (projectDescription && projectDescription.contains(e.target)) {
+        const canScrollDown = projectDescription.scrollTop + projectDescription.clientHeight < projectDescription.scrollHeight;
+        const canScrollUp = projectDescription.scrollTop > 0;
+
+        if ((e.deltaY > 0 && canScrollDown) || (e.deltaY < 0 && canScrollUp)) {
+          return;
+        }
+      }
+
+      e.preventDefault();
+      window.scrollBy(e.deltaY, 0);
     }, { passive: false });
     function fitProjectPair() {
       const gallery = document.querySelector(".project-gallery");
