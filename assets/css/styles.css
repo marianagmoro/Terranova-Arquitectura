@@ -530,19 +530,27 @@ body {
   display: none;
 }
 
+.project-page .projects-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
 .project-page .projects-text {
-  font-size: 1.1rem;
+  font-size: 1.12rem;
   font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 .project-page .project-title-meta {
-  font-size: 0.74rem;
-  letter-spacing: 0.02em;
+  margin-top: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.01em;
 }
 
 .project-description {
   position: absolute;
-  top: calc(33vh + 7.4rem);
+  top: calc(33vh + 8.25rem);
   left: 2rem;
   width: calc(25vw - 2rem);
   z-index: 10;
@@ -552,7 +560,7 @@ body {
   font-family: "Arial", sans-serif;
   font-size: 0.9rem;
   font-weight: 300;
-  line-height: 1.35;
+  line-height: 1.4;
   color: #333;
   margin: 0;
   text-align: justify;
