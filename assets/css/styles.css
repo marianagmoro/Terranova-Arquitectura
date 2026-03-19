@@ -228,6 +228,13 @@ body {
   font-weight: bold;
   font-size: 0.9rem;
   letter-spacing: -0.02em;
+  cursor: pointer;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.projects-text:hover {
+  color: #111;
+  opacity: 0.85;
 }
 
 .scroll-arrow {
@@ -259,14 +266,29 @@ body {
   height: 100%;
 }
 
-.years-column {
-  position: absolute;
+.projects-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-top: calc(33vh + 4rem);
+  padding: 0 2rem 4rem;
+}
+
+.projects-sidebar {
+  flex: 0 0 max(190px, 20vw);
+  position: sticky;
   top: calc(33vh + 6rem);
-  left: 2rem;
-  z-index: 1000;
+}
+
+.years-column {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+
+.projects-content {
+  flex: 1;
+  min-width: 0;
 }
 
 .year-link {
@@ -303,14 +325,10 @@ body {
 }
 
 .gallery {
-  position: absolute;
-  top: calc(33vh + 4rem);
-  left: calc(25vw + 2rem);
-  right: 2rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
-  padding-bottom: 4rem;
+  width: 100%;
 }
 
 .gallery-item {
@@ -319,7 +337,7 @@ body {
   position: relative;
   opacity: 1;
   transform: translateY(0) scale(1);
-  transition: opacity 0.28s ease, transform 0.28s ease;
+  transition: opacity 0.15s ease, transform 0.15s ease;
 }
 
 .gallery-item.filter-exit {
@@ -330,6 +348,10 @@ body {
 .gallery-item.filter-enter {
   opacity: 0;
   transform: translateY(8px) scale(0.98);
+}
+
+.gallery-item.is-hidden {
+  display: none;
 }
 
 .project-link {
@@ -368,6 +390,40 @@ body {
 
 .gallery-item:hover .project-overlay {
   opacity: 1;
+}
+
+@media (max-width: 1024px) {
+  .projects-sidebar {
+    flex-basis: 160px;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .projects-layout {
+    display: block;
+    margin-top: calc(33vh + 3.5rem);
+    padding: 0 1rem 3rem;
+  }
+
+  .projects-sidebar {
+    position: static;
+    margin-bottom: 1rem;
+  }
+
+  .years-column {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.6rem 1rem;
+  }
+
+  .gallery {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
 }
 
 .project-info {

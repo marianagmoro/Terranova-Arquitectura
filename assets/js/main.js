@@ -71,8 +71,21 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  const FILTER_ANIMATION_MS = 280;
+  const FILTER_ANIMATION_MS = 150;
   const galleryItems = document.querySelectorAll(".gallery-item");
+  const yearLinks = document.querySelectorAll(".year-link");
+  const projectsTitle = document.getElementById("projects-title");
+  const homePage = document.querySelector(".home-page");
+  const gallery = document.querySelector(".gallery");
+  let activeYearFilter = null;
+
+  function adjustPageHeight() {
+    if (!homePage || !gallery) {
+      return;
+    }
+    const galleryBottom = gallery.offsetTop + gallery.offsetHeight;
+    homePage.style.minHeight = galleryBottom + 80 + "px";
+  }
 
   // Abrir página individual al hacer click en una tarjeta de proyecto
   galleryItems.forEach((item) => {
@@ -94,10 +107,32 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  function showItemWithAnimation(item) {
-    item.style.display = "block";
+  function showItemWithAnimation(item, animate) {
+    if (item._hideTimeoutId) {
+      clearTimeout(item._hideTimeoutId);
+      item._hideTimeoutId = null;
+    }
+    if (!item.classList.contains("is-hidden") && !item.classList.contains("filter-exit") && !animate) {
+      return;
+    }
+
+    item.classList.remove("is-hidden");
     item.classList.remove("filter-exit");
+
+    if (!animate) {
+      item.classList.remove("filter-enter");
+      return;
+    }
+
     item.classList.add("filter-enter");
+    if (item._showRafId) {
+      cancelAnimationFrame(item._showRafId);
+    }
+    item._showRafId = requestAnimationFrame(() => {
+      item.classList.remove("filter-enter");
+      item._showRafId = null;
+    });
+
     if (item._enterTimeoutId) {
       clearTimeout(item._enterTimeoutId);
     }
@@ -107,27 +142,74 @@ document.addEventListener("DOMContentLoaded", function () {
     }, FILTER_ANIMATION_MS);
   }
 
-  function hideItemWithAnimation(item) {
+  function hideItemWithAnimation(item, animate) {
+    if (item._hideTimeoutId) {
+      clearTimeout(item._hideTimeoutId);
+      item._hideTimeoutId = null;
+    }
+    if (item._showRafId) {
+      cancelAnimationFrame(item._showRafId);
+      item._showRafId = null;
+    }
     if (item._enterTimeoutId) {
       clearTimeout(item._enterTimeoutId);
       item._enterTimeoutId = null;
     }
+
+    if (!animate) {
+      item.classList.remove("filter-enter", "filter-exit");
+      item.classList.add("is-hidden");
+      return;
+    }
+
     item.classList.remove("filter-enter");
     item.classList.add("filter-exit");
-    item.style.display = "none";
+    item._hideTimeoutId = setTimeout(() => {
+      item.classList.add("is-hidden");
+      item.classList.remove("filter-exit");
+      item._hideTimeoutId = null;
+      adjustPageHeight();
+    }, FILTER_ANIMATION_MS);
   }
 
-  function applyGalleryFilter(selectedYear) {
+  function setYearsActive(selectedYear) {
+    yearLinks.forEach((link) => {
+      const isActive = selectedYear && link.getAttribute("data-filter") === selectedYear;
+      link.classList.toggle("active", !!isActive);
+      link.classList.toggle("was-active", !!isActive);
+    });
+  }
+
+  function applyGalleryFilter(selectedYear, animate = true) {
+    const shouldAnimate = animate && activeYearFilter !== null;
+    activeYearFilter = selectedYear || null;
+
     galleryItems.forEach((item) => {
       const itemYear = item.getAttribute("data-year");
-      const shouldShow = !selectedYear || itemYear === selectedYear;
+      const shouldShow = !activeYearFilter || itemYear === activeYearFilter;
 
       if (shouldShow) {
-        showItemWithAnimation(item);
+        showItemWithAnimation(item, shouldAnimate);
       } else {
-        hideItemWithAnimation(item);
+        hideItemWithAnimation(item, shouldAnimate);
       }
     });
+
+    setYearsActive(activeYearFilter);
+
+    if (!shouldAnimate) {
+      adjustPageHeight();
+      return;
+    }
+
+    setTimeout(adjustPageHeight, FILTER_ANIMATION_MS + 10);
+  }
+
+  function resetGalleryFilter(animate = true) {
+    if (!activeYearFilter) {
+      return;
+    }
+    applyGalleryFilter(null, animate);
   }
 
   // Filtrado por años
@@ -136,33 +218,21 @@ document.addEventListener("DOMContentLoaded", function () {
       e.preventDefault();
 
       const selectedYear = e.target.getAttribute("data-filter") || e.target.textContent.trim();
-      const wasActive = e.target.classList.contains("active");
-
-      // Remover clase activa de todos los años
-      document.querySelectorAll(".year-link").forEach((link) => {
-        link.classList.remove("active");
-        link.classList.remove("was-active");
-      });
+      const isSameYear = selectedYear === activeYearFilter;
 
       // Si ya estaba activo este año, mostrar todos
-      if (wasActive) {
-        applyGalleryFilter(null);
+      if (isSameYear) {
+        resetGalleryFilter();
         return;
       }
 
       // Marcar como activo y filtrar
-      e.target.classList.add("active");
-      e.target.classList.add("was-active");
       applyGalleryFilter(selectedYear);
     }
 
     // Reset filtro al clicar en "Proyectos"
     if (e.target.id === "projects-title") {
-      document.querySelectorAll(".year-link").forEach((link) => {
-        link.classList.remove("active");
-        link.classList.remove("was-active");
-      });
-      applyGalleryFilter(null);
+      resetGalleryFilter();
     }
   });
 
@@ -182,14 +252,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Ajustar altura de la página según el contenido real de la galería
-  const homePage = document.querySelector(".home-page");
-  const gallery = document.querySelector(".gallery");
   if (homePage && gallery) {
-    function adjustPageHeight() {
-      const galleryBottom = gallery.offsetTop + gallery.offsetHeight;
-      homePage.style.minHeight = galleryBottom + 80 + "px";
-    }
+    applyGalleryFilter(null, false);
     // Ejecutar cuando las imágenes ya estén cargadas (no solo el DOM)
     window.addEventListener("load", adjustPageHeight);
     window.addEventListener("resize", adjustPageHeight);
