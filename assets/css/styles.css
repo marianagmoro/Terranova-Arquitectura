@@ -530,6 +530,16 @@ body {
   display: none;
 }
 
+.project-page .projects-text {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.project-page .project-title-meta {
+  font-size: 0.74rem;
+  letter-spacing: 0.02em;
+}
+
 .project-description {
   position: absolute;
   top: calc(33vh + 7.4rem);
@@ -540,9 +550,9 @@ body {
 
 .project-text {
   font-family: "Arial", sans-serif;
-  font-size: 10px;
+  font-size: 0.9rem;
   font-weight: 300;
-  line-height: 1.2;
+  line-height: 1.35;
   color: #333;
   margin: 0;
   text-align: justify;
