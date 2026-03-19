@@ -863,7 +863,7 @@ body {
 }
 
 .estudio-text {
-  flex: 0 0 35vw;
+  flex: 0 0 calc(50% - 0.5rem);
   padding: 0 0.25rem 0 0;
   display: flex;
   flex-direction: column;
@@ -899,24 +899,26 @@ body {
   letter-spacing: 0.06em;
   color: #5a5a5a;
   text-transform: uppercase;
+  display: none;
 }
 
 .estudio-bio {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  padding: 0.55rem 0.65rem 0.6rem;
-  background: rgba(255, 255, 255, 0.34);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 0.55rem 0.65rem 0.6rem 0;
+  background: transparent;
+  border: none;
 }
 
 .estudio-bio-name {
   font-family: "Arial", sans-serif;
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: #333;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: #555;
   margin: 0;
+  text-transform: uppercase;
 }
 
 .estudio-bio-text {
@@ -943,7 +945,7 @@ body {
 }
 
 .estudio-photo {
-  flex: 1;
+  flex: 0 0 calc(50% - 0.5rem);
   margin: 0;
   overflow: hidden;
 }
