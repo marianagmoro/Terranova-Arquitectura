@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -34,7 +34,7 @@
 
         <div class="project-description scroll-vertical-zone">
       <p class="project-text">
-        Texto de prueba: esta es una descripción provisional larga para validar maquetación, jerarquía tipográfica y comportamiento del scroll en la columna izquierda del proyecto.
+        El reto en este proyecto era dar una nueva vida a un viejo local en el que había una peluquería al que se le añadió una entreplanta, antigua vivienda de los porteros de un edificio histórico espectacular en una preciosa calle de La Coruña. Con la reforma buscamos que la luz llegara a todos los rincones, así como adaptar la estructura de la propiedad a su nuevo uso. Gracias a la cantidad y el tamaño de las ventanas y a una altura de techos de 4mts., el resultado fue espectacular.
       </p>
     </div>
 
@@ -77,7 +77,7 @@
 
       <div class="project-gallery-note scroll-vertical-zone">
         <p class="project-text">
-          Texto de prueba: bloque intermedio de descripción dentro de la galería para comprobar lectura, ritmo visual y transición entre la primera y segunda secuencia de imágenes.
+          La mayor parte del presupuesto se invirtió en la carpintería, toda nueva y hecha a medida en castaño macizo respetando el diseño original de todas las viviendas del mismo edificio, preservando a la vez la esencia, la memoria, y el espíritu de la construcción existente pero sin renunciar al confort y la eficiencia de la construcción actual.
         </p>
       </div>
 
@@ -122,6 +122,30 @@
     // Convertir scroll vertical en horizontal para elementos debajo de la línea
     const scrollVerticalZones = Array.from(document.querySelectorAll(".scroll-vertical-zone"));
     const projectGallerySequence = document.querySelector(".project-gallery-sequence");
+
+    function classifyGalleryPanelsByOrientation() {
+      if (!projectGallerySequence) {
+        return;
+      }
+
+      const panels = Array.from(projectGallerySequence.querySelectorAll(".project-image-panel"));
+      panels.forEach((panel) => {
+        const image = panel.querySelector(".project-image");
+        if (!image || !image.naturalWidth || !image.naturalHeight) {
+          return;
+        }
+
+        panel.classList.remove("is-horizontal", "is-vertical", "is-square");
+
+        if (image.naturalWidth > image.naturalHeight) {
+          panel.classList.add("is-horizontal");
+        } else if (image.naturalWidth < image.naturalHeight) {
+          panel.classList.add("is-vertical");
+        } else {
+          panel.classList.add("is-square");
+        }
+      });
+    }
 
     function alignHorizontalCanvasToGalleryEnd() {
       if (!projectGallerySequence) {
@@ -173,6 +197,7 @@
       const done = () => {
         pending -= 1;
         if (pending <= 0) {
+          classifyGalleryPanelsByOrientation();
           alignHorizontalCanvasToGalleryEnd();
         }
       };

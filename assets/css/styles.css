@@ -617,6 +617,9 @@ body {
   display: flex;
   align-items: stretch;
   gap: 1rem;
+  --gallery-gap: 1rem;
+  --gallery-visible-width: calc(75vw - 4rem);
+  --gallery-unit: calc((var(--gallery-visible-width) - (var(--gallery-gap) * 3)) / 4);
 }
 
 .project-gallery-sequence .project-image-panel {
@@ -624,6 +627,17 @@ body {
   min-width: 300px;
   overflow: hidden;
   position: relative;
+}
+
+.project-gallery-sequence .project-image-panel.is-vertical,
+.project-gallery-sequence .project-image-panel.is-square {
+  flex-basis: max(var(--gallery-unit), 180px);
+  min-width: 0;
+}
+
+.project-gallery-sequence .project-image-panel.is-horizontal {
+  flex-basis: max(calc((var(--gallery-unit) * 3) + (var(--gallery-gap) * 2)), 420px);
+  min-width: 0;
 }
 
 .project-gallery-sequence .project-gallery-note {

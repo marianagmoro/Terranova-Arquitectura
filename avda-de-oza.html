@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -34,7 +34,7 @@
 
         <div class="project-description scroll-vertical-zone">
       <p class="project-text">
-        Texto de prueba: esta es una descripción provisional larga para validar maquetación, jerarquía tipográfica y comportamiento del scroll en la columna izquierda del proyecto.
+        El objetivo de este proyecto era intentar aplicar nuestro estilo a la esencia de la arquitectura original, logrando un minimalismo elegante y actual. Ubicada en pleno barrio de Cuatro Caminos, en un edificio de mediados del Siglo XX, este piso de 190 Mts nunca había sido reformado, se encontraba en su estado original, por lo que había un montón de elementos originales que se podían restaurar, pero a su vez había que cambiarlo absolutamente todo.<br /><br />Los espacios de la zona de noche se conservaron tal cual estaban, y en la zona de día se tiraron todos los tabiques que había entre la entrada, el salón, el comedor y la cocina, dejando un espacio único enorme pero separándolos ligeramente con unas preciosas mamparas de madera de roble y cristal. Además de permitir una circulación más fluida, esta solución permitió que la luz natural inundara la entrada y la cocina, que anteriormente era una zona en total penumbra.
       </p>
     </div>
 
@@ -77,7 +77,7 @@
 
       <div class="project-gallery-note scroll-vertical-zone">
         <p class="project-text">
-          Texto de prueba: bloque intermedio de descripción dentro de la galería para comprobar lectura, ritmo visual y transición entre la primera y segunda secuencia de imágenes.
+          Todas las estancias contaban con molduras y rosetones de escayola en sus techos, radiadores de hierro fundido y carpinterías de castaño que recuperamos y actualizamos. Diseñamos todos los acabados en tonos neutros, y el resultado fue una estética clásica pero renovada, atemporal y refinada para una vivienda de espacios generosos.
         </p>
       </div>
 
@@ -121,6 +121,30 @@
     // Convertir scroll vertical en horizontal para elementos debajo de la línea
     const scrollVerticalZones = Array.from(document.querySelectorAll(".scroll-vertical-zone"));
     const projectGallerySequence = document.querySelector(".project-gallery-sequence");
+
+    function classifyGalleryPanelsByOrientation() {
+      if (!projectGallerySequence) {
+        return;
+      }
+
+      const panels = Array.from(projectGallerySequence.querySelectorAll(".project-image-panel"));
+      panels.forEach((panel) => {
+        const image = panel.querySelector(".project-image");
+        if (!image || !image.naturalWidth || !image.naturalHeight) {
+          return;
+        }
+
+        panel.classList.remove("is-horizontal", "is-vertical", "is-square");
+
+        if (image.naturalWidth > image.naturalHeight) {
+          panel.classList.add("is-horizontal");
+        } else if (image.naturalWidth < image.naturalHeight) {
+          panel.classList.add("is-vertical");
+        } else {
+          panel.classList.add("is-square");
+        }
+      });
+    }
 
     function alignHorizontalCanvasToGalleryEnd() {
       if (!projectGallerySequence) {
@@ -172,6 +196,7 @@
       const done = () => {
         pending -= 1;
         if (pending <= 0) {
+          classifyGalleryPanelsByOrientation();
           alignHorizontalCanvasToGalleryEnd();
         }
       };

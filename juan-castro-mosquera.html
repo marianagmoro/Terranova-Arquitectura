@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -34,7 +34,7 @@
 
         <div class="project-description scroll-vertical-zone">
       <p class="project-text">
-        Texto de prueba: esta es una descripción provisional larga para validar maquetación, jerarquía tipográfica y comportamiento del scroll en la columna izquierda del proyecto.
+        En su origen, esta vivienda estaba organizada en torno a un pasillo longitudinal que funcionaba casi como un túnel, separando una sucesión de habitaciones pequeñas y poco comunicadas entre sí. Esta disposición, habitual de la época en que se construyó, generaba un interior oscuro y fragmentado, muy alejado de las necesidades actuales.<br /><br />Optamos entonces por una demolición integral que liberara la planta y permitiese que la luz natural recorriera la casa de un extremo a otro. La intervención pone en valor las vigas maestras existentes, que dejan de percibirse como un límite para convertirse en el elemento que ordena el nuevo espacio. Por su parte, las particiones se alinean con ellas, integrando tanto la estructura como los cerramientos y el mobiliario en el conjunto. El resultado es una vivienda más continua y fluida, donde la antigua compartimentación ha dado lugar a estancias más amplias y conectadas.
       </p>
     </div>
 
@@ -77,7 +77,7 @@
 
       <div class="project-gallery-note scroll-vertical-zone">
         <p class="project-text">
-          Texto de prueba: bloque intermedio de descripción dentro de la galería para comprobar lectura, ritmo visual y transición entre la primera y segunda secuencia de imágenes.
+          Cabe destacar en esta reforma el juego matérico y los acabados, utilizados como elementos esenciales para actualizar el legado de la vivienda y crear un interior clásico pero moderno a la vez. La cocina de madera con las encimeras en acero inoxidable o los cuartos de baño en microcemento y madera son un buen ejemplo.
         </p>
       </div>
 
@@ -121,6 +121,30 @@
     // Convertir scroll vertical en horizontal para elementos debajo de la línea
     const scrollVerticalZones = Array.from(document.querySelectorAll(".scroll-vertical-zone"));
     const projectGallerySequence = document.querySelector(".project-gallery-sequence");
+
+    function classifyGalleryPanelsByOrientation() {
+      if (!projectGallerySequence) {
+        return;
+      }
+
+      const panels = Array.from(projectGallerySequence.querySelectorAll(".project-image-panel"));
+      panels.forEach((panel) => {
+        const image = panel.querySelector(".project-image");
+        if (!image || !image.naturalWidth || !image.naturalHeight) {
+          return;
+        }
+
+        panel.classList.remove("is-horizontal", "is-vertical", "is-square");
+
+        if (image.naturalWidth > image.naturalHeight) {
+          panel.classList.add("is-horizontal");
+        } else if (image.naturalWidth < image.naturalHeight) {
+          panel.classList.add("is-vertical");
+        } else {
+          panel.classList.add("is-square");
+        }
+      });
+    }
 
     function alignHorizontalCanvasToGalleryEnd() {
       if (!projectGallerySequence) {
@@ -172,6 +196,7 @@
       const done = () => {
         pending -= 1;
         if (pending <= 0) {
+          classifyGalleryPanelsByOrientation();
           alignHorizontalCanvasToGalleryEnd();
         }
       };

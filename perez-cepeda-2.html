@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -122,6 +122,30 @@
     const scrollVerticalZones = Array.from(document.querySelectorAll(".scroll-vertical-zone"));
     const projectGallerySequence = document.querySelector(".project-gallery-sequence");
 
+    function classifyGalleryPanelsByOrientation() {
+      if (!projectGallerySequence) {
+        return;
+      }
+
+      const panels = Array.from(projectGallerySequence.querySelectorAll(".project-image-panel"));
+      panels.forEach((panel) => {
+        const image = panel.querySelector(".project-image");
+        if (!image || !image.naturalWidth || !image.naturalHeight) {
+          return;
+        }
+
+        panel.classList.remove("is-horizontal", "is-vertical", "is-square");
+
+        if (image.naturalWidth > image.naturalHeight) {
+          panel.classList.add("is-horizontal");
+        } else if (image.naturalWidth < image.naturalHeight) {
+          panel.classList.add("is-vertical");
+        } else {
+          panel.classList.add("is-square");
+        }
+      });
+    }
+
     function alignHorizontalCanvasToGalleryEnd() {
       if (!projectGallerySequence) {
         return;
@@ -172,6 +196,7 @@
       const done = () => {
         pending -= 1;
         if (pending <= 0) {
+          classifyGalleryPanelsByOrientation();
           alignHorizontalCanvasToGalleryEnd();
         }
       };

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -34,42 +34,42 @@
 
         <div class="project-description scroll-vertical-zone">
       <p class="project-text">
-        Texto de prueba: esta es una descripción provisional larga para validar maquetación, jerarquía tipográfica y comportamiento del scroll en la columna izquierda del proyecto.
+        Casi todas las casas que reformamos cambian radicalmente, pero en este caso la transformación fue espectacular. Cuando la adquirimos, era una oficina oscura y tétrica que llevaba abandonada un montón de años. La nueva distribución optimizó de tal manera los espacios y la luz natural, que quedó irreconocible.
       </p>
     </div>
 
         <div class="project-gallery project-gallery-sequence">
       <div class="project-image-panel">
         <img
-          src="assets/img/proyectos/primo-de-rivera/portada.jpeg"
+          src="assets/img/proyectos/primo-de-rivera/salon1.jpeg"
           alt="Primo de Rivera - Vista 1"
           class="project-image"
         />
       </div>
       <div class="project-image-panel">
         <img
-          src="assets/img/proyectos/primo-de-rivera/portada.jpeg"
+          src="assets/img/proyectos/primo-de-rivera/salon3.jpeg"
           alt="Primo de Rivera - Vista 2"
           class="project-image"
         />
       </div>
       <div class="project-image-panel">
         <img
-          src="assets/img/proyectos/primo-de-rivera/portada.jpeg"
+          src="assets/img/proyectos/primo-de-rivera/salon2.jpeg"
           alt="Primo de Rivera - Vista 3"
           class="project-image"
         />
       </div>
       <div class="project-image-panel">
         <img
-          src="assets/img/proyectos/primo-de-rivera/portada.jpeg"
+          src="assets/img/proyectos/primo-de-rivera/entrada3.jpeg"
           alt="Primo de Rivera - Vista 4"
           class="project-image"
         />
       </div>
       <div class="project-image-panel">
         <img
-          src="assets/img/proyectos/primo-de-rivera/portada.jpeg"
+          src="assets/img/proyectos/primo-de-rivera/cocina2"
           alt="Primo de Rivera - Vista 5"
           class="project-image"
         />
@@ -77,41 +77,41 @@
 
       <div class="project-gallery-note scroll-vertical-zone">
         <p class="project-text">
-          Texto de prueba: bloque intermedio de descripción dentro de la galería para comprobar lectura, ritmo visual y transición entre la primera y segunda secuencia de imágenes.
+          Conservamos y renovamos sus maravillosas carpinterías en pino tea, potenciamos sus altísimos techos y le devolvimos el aire señorial que se merecía esta vivienda, situada en uno de los edificios más emblemáticos de La Coruña, proyectado en el año 1927 por el arquitecto Pedro Mariño, encuadrado entre el eclecticismo y el modernismo, y autor también del palacio Municipal de La Coruña.
         </p>
       </div>
 
       <div class="project-image-panel">
         <img
-          src="assets/img/proyectos/primo-de-rivera/portada.jpeg"
+          src="assets/img/proyectos/primo-de-rivera/hab1_6.jpeg"
           alt="Primo de Rivera - Vista 6"
           class="project-image"
         />
       </div>
       <div class="project-image-panel">
         <img
-          src="assets/img/proyectos/primo-de-rivera/portada.jpeg"
+          src="assets/img/proyectos/primo-de-rivera/hab2_3.jpeg"
           alt="Primo de Rivera - Vista 7"
           class="project-image"
         />
       </div>
       <div class="project-image-panel">
         <img
-          src="assets/img/proyectos/primo-de-rivera/portada.jpeg"
+          src="assets/img/proyectos/primo-de-rivera/hab3_2.jpg"
           alt="Primo de Rivera - Vista 8"
           class="project-image"
         />
       </div>
       <div class="project-image-panel">
         <img
-          src="assets/img/proyectos/primo-de-rivera/portada.jpeg"
+          src="assets/img/proyectos/primo-de-rivera/baño1.jpeg"
           alt="Primo de Rivera - Vista 9"
           class="project-image"
         />
       </div>
       <div class="project-image-panel">
         <img
-          src="assets/img/proyectos/primo-de-rivera/portada.jpeg"
+          src="assets/img/proyectos/primo-de-rivera/baño2.jpeg"
           alt="Primo de Rivera - Vista 10"
           class="project-image"
         />
@@ -121,6 +121,30 @@
     // Convertir scroll vertical en horizontal para elementos debajo de la línea
     const scrollVerticalZones = Array.from(document.querySelectorAll(".scroll-vertical-zone"));
     const projectGallerySequence = document.querySelector(".project-gallery-sequence");
+
+    function classifyGalleryPanelsByOrientation() {
+      if (!projectGallerySequence) {
+        return;
+      }
+
+      const panels = Array.from(projectGallerySequence.querySelectorAll(".project-image-panel"));
+      panels.forEach((panel) => {
+        const image = panel.querySelector(".project-image");
+        if (!image || !image.naturalWidth || !image.naturalHeight) {
+          return;
+        }
+
+        panel.classList.remove("is-horizontal", "is-vertical", "is-square");
+
+        if (image.naturalWidth > image.naturalHeight) {
+          panel.classList.add("is-horizontal");
+        } else if (image.naturalWidth < image.naturalHeight) {
+          panel.classList.add("is-vertical");
+        } else {
+          panel.classList.add("is-square");
+        }
+      });
+    }
 
     function alignHorizontalCanvasToGalleryEnd() {
       if (!projectGallerySequence) {
@@ -172,6 +196,7 @@
       const done = () => {
         pending -= 1;
         if (pending <= 0) {
+          classifyGalleryPanelsByOrientation();
           alignHorizontalCanvasToGalleryEnd();
         }
       };

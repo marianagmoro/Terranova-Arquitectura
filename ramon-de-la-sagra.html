@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -34,7 +34,7 @@
 
         <div class="project-description scroll-vertical-zone">
       <p class="project-text">
-        Texto de prueba: esta es una descripción provisional larga para validar maquetación, jerarquía tipográfica y comportamiento del scroll en la columna izquierda del proyecto.
+        En una zona céntrica coruñesa, que destaca por su arquitectura con personalidad, se sitúa este apartamento singular. Se trata de una construcción de mediados del Siglo XX, con molduras, techos altos y ventanas y puertas de madera de castaño. Un piso amplio y con muchas posibilidades, así que la idea fue recuperar ese aire clásico original pero actualizándolo.<br /><br />Durante la renovación, la intención fue volver a darle el porte tradicional y distinguido que tenía en origen la vivienda, pero que se había perdido en una reforma anterior, y a la vez, mejorarlo y modernizarlo tecnológicamente. Queríamos un estilo que perdurara en el tiempo. Combinar la estética con la funcionalidad y poder añadir las instalaciones sin alterar demasiado los espacios. Un clásico muy de hoy.
       </p>
     </div>
 
@@ -77,7 +77,7 @@
 
       <div class="project-gallery-note scroll-vertical-zone">
         <p class="project-text">
-          Texto de prueba: bloque intermedio de descripción dentro de la galería para comprobar lectura, ritmo visual y transición entre la primera y segunda secuencia de imágenes.
+          Trabajamos las proporciones, la armonía y los nuevos usos. La cocina común y el amplio salón se convierten en el punto de encuentro de la familia en la zona de día, orientada a la calle y con unas vistas preciosas a la bahía de La Coruña. Y la zona de noche, orientada hacia los patios traseros, con sus 3 dormitorios y 2 baños, queda sutilmente apartada para ganar intimidad.
         </p>
       </div>
 
@@ -121,6 +121,30 @@
     // Convertir scroll vertical en horizontal para elementos debajo de la línea
     const scrollVerticalZones = Array.from(document.querySelectorAll(".scroll-vertical-zone"));
     const projectGallerySequence = document.querySelector(".project-gallery-sequence");
+
+    function classifyGalleryPanelsByOrientation() {
+      if (!projectGallerySequence) {
+        return;
+      }
+
+      const panels = Array.from(projectGallerySequence.querySelectorAll(".project-image-panel"));
+      panels.forEach((panel) => {
+        const image = panel.querySelector(".project-image");
+        if (!image || !image.naturalWidth || !image.naturalHeight) {
+          return;
+        }
+
+        panel.classList.remove("is-horizontal", "is-vertical", "is-square");
+
+        if (image.naturalWidth > image.naturalHeight) {
+          panel.classList.add("is-horizontal");
+        } else if (image.naturalWidth < image.naturalHeight) {
+          panel.classList.add("is-vertical");
+        } else {
+          panel.classList.add("is-square");
+        }
+      });
+    }
 
     function alignHorizontalCanvasToGalleryEnd() {
       if (!projectGallerySequence) {
@@ -172,6 +196,7 @@
       const done = () => {
         pending -= 1;
         if (pending <= 0) {
+          classifyGalleryPanelsByOrientation();
           alignHorizontalCanvasToGalleryEnd();
         }
       };

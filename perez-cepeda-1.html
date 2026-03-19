@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -34,7 +34,7 @@
 
         <div class="project-description scroll-vertical-zone">
       <p class="project-text">
-        Texto de prueba: esta es una descripción provisional larga para validar maquetación, jerarquía tipográfica y comportamiento del scroll en la columna izquierda del proyecto.
+        En pleno Ensanche Coruñés transformamos una vivienda de 1950 en un interior donde la memoria arquitectónica y el diseño contemporáneo conviven con naturalidad. Un proyecto que replantea qué significa hoy lo que llamamos clásico.<br /><br />Lo clásico ya no se percibe como un lenguaje obsoleto, sino como un territorio lleno de posibilidades. La distancia entre lo clásico y lo moderno, en realidad, nunca ha sido tan clara como solemos imaginar. Más que una cuestión de estilos, se trata de actitudes. De cómo se interpretan las proporciones, la materia, la luz y la organización del espacio. Este proyecto se sitúa en ese punto de fricción tan complicado. Molduras, techos, suelos y carpintería trabajados reconstruyen la memoria de la vivienda sin renunciar a una atmósfera contemporánea.
       </p>
     </div>
 
@@ -77,7 +77,7 @@
 
       <div class="project-gallery-note scroll-vertical-zone">
         <p class="project-text">
-          Texto de prueba: bloque intermedio de descripción dentro de la galería para comprobar lectura, ritmo visual y transición entre la primera y segunda secuencia de imágenes.
+          Como es habitual en el tipo de planta de estos edificios, nos encontramos con una vivienda en tubo e hiper compartimentada. El buen estudio de la distribución es siempre una de las partes más importantes del proyecto. En este caso, queríamos diferenciar bien la zona de noche de la zona más social, pero al mismo tiempo conseguir una vivienda muy fluida, abierta y con el mínimo espacio de pasillos posible. Dimos muchas vueltas a la distribución para conseguir el programa requerido y el modelo de vivienda abierta y conectada.
         </p>
       </div>
 
@@ -121,6 +121,30 @@
     // Convertir scroll vertical en horizontal para elementos debajo de la línea
     const scrollVerticalZones = Array.from(document.querySelectorAll(".scroll-vertical-zone"));
     const projectGallerySequence = document.querySelector(".project-gallery-sequence");
+
+    function classifyGalleryPanelsByOrientation() {
+      if (!projectGallerySequence) {
+        return;
+      }
+
+      const panels = Array.from(projectGallerySequence.querySelectorAll(".project-image-panel"));
+      panels.forEach((panel) => {
+        const image = panel.querySelector(".project-image");
+        if (!image || !image.naturalWidth || !image.naturalHeight) {
+          return;
+        }
+
+        panel.classList.remove("is-horizontal", "is-vertical", "is-square");
+
+        if (image.naturalWidth > image.naturalHeight) {
+          panel.classList.add("is-horizontal");
+        } else if (image.naturalWidth < image.naturalHeight) {
+          panel.classList.add("is-vertical");
+        } else {
+          panel.classList.add("is-square");
+        }
+      });
+    }
 
     function alignHorizontalCanvasToGalleryEnd() {
       if (!projectGallerySequence) {
@@ -172,6 +196,7 @@
       const done = () => {
         pending -= 1;
         if (pending <= 0) {
+          classifyGalleryPanelsByOrientation();
           alignHorizontalCanvasToGalleryEnd();
         }
       };
