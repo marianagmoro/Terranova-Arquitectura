@@ -696,6 +696,14 @@ body {
   height: calc(var(--project-slot-height) - 4.25rem);
 }
 
+.project-content-track .project-gallery-note {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  overflow-y: auto;
+  margin-right: 2rem;
+}
+
 .project-content-track .project-image-panel.is-horizontal {
   flex-basis: calc((var(--project-slot-width) * 2) + var(--project-slot-gap));
 }
