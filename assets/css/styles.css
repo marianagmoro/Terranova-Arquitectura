@@ -621,7 +621,7 @@ body {
 }
 
 .project-gallery-sequence .project-image-panel {
-  flex: 0 0 30vw;
+  flex: 0 0 calc(37.5vw - 2.5rem);
   min-width: 300px;
   overflow: hidden;
   position: relative;
