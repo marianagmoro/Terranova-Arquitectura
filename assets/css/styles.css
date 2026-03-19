@@ -649,6 +649,50 @@ body {
   overflow-y: auto;
 }
 
+.project-content-track {
+  position: absolute;
+  top: calc(33vh + 4rem);
+  left: 2rem;
+  right: 2rem;
+  bottom: 4rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  --project-slot-gap: 1rem;
+  --project-slot-width: calc((100% - (var(--project-slot-gap) * 3)) / 4);
+  --project-slot-height: calc(100vh - 33vh - 8rem);
+  min-height: var(--project-slot-height);
+}
+
+.project-content-track .project-description,
+.project-content-track .project-gallery-note,
+.project-content-track .project-image-panel {
+  flex: 0 0 var(--project-slot-width);
+  min-width: 0;
+  height: var(--project-slot-height);
+}
+
+.project-content-track .project-description {
+  position: relative;
+  top: auto;
+  left: auto;
+  right: auto;
+  bottom: auto;
+  width: var(--project-slot-width);
+  overflow-y: auto;
+  margin-top: 4.25rem;
+  height: calc(var(--project-slot-height) - 4.25rem);
+}
+
+.project-content-track .project-image-panel.is-horizontal {
+  flex-basis: calc((var(--project-slot-width) * 2) + var(--project-slot-gap));
+}
+
+.project-content-track .project-image-panel.is-vertical,
+.project-content-track .project-image-panel.is-square {
+  flex-basis: var(--project-slot-width);
+}
+
 .project-lightbox {
   position: fixed;
   inset: 0;
@@ -687,6 +731,12 @@ body {
 }
 
 @media (max-width: 768px) {
+  .project-page {
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
   .project-description {
     position: static;
     width: auto;
@@ -714,6 +764,44 @@ body {
   .project-gallery-sequence .project-image-panel,
   .project-gallery-sequence .project-gallery-note {
     min-width: 0;
+  }
+
+  .project-content-track {
+    position: static;
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+    padding: calc(33vh + 4rem) 1rem 2rem;
+    min-height: 0;
+  }
+
+  .project-content-track .project-description,
+  .project-content-track .project-gallery-note,
+  .project-content-track .project-image-panel,
+  .project-content-track .project-image-panel.is-horizontal,
+  .project-content-track .project-image-panel.is-vertical,
+  .project-content-track .project-image-panel.is-square {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    flex-basis: auto;
+  }
+
+  .project-content-track .project-image-panel {
+    aspect-ratio: 444 / 563;
+  }
+
+  .project-content-track .project-image-panel.is-horizontal {
+    aspect-ratio: 889 / 563;
+  }
+
+  .project-content-track .project-description,
+  .project-content-track .project-gallery-note {
+    max-height: 55vh;
   }
 }
 
