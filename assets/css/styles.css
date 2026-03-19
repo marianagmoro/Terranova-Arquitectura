@@ -451,7 +451,7 @@ body {
   color: #111;
   font-family: "Arial", sans-serif;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.9rem;
   letter-spacing: -0.02em;
 }
 
@@ -466,7 +466,7 @@ body {
   font-family: "Arial", sans-serif;
   font-weight: 400;
   font-size: 0.75rem;
-  letter-spacing: 0.03em;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
 }
 
@@ -475,7 +475,7 @@ body {
   font-family: "Arial", sans-serif;
   font-weight: 400;
   font-size: 0.75rem;
-  letter-spacing: 0.03em;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
 }
 
