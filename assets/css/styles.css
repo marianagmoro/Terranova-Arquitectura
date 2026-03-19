@@ -704,3 +704,174 @@ body {
   }
 }
 
+/* ==================== ESTUDIO PAGE ==================== */
+.estudio-page {
+  background: #e5e4e4;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.estudio-page .home-logo {
+  position: static;
+  z-index: auto;
+}
+
+.estudio-page .home-nav {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  z-index: auto;
+}
+
+.estudio-page .horizontal-line {
+  display: none;
+}
+
+.estudio-layout {
+  position: absolute;
+  top: 33vh;
+  left: 2rem;
+  right: 2rem;
+  bottom: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.estudio-text {
+  flex: 0 0 35vw;
+  padding: 0.9rem 0.8rem 0.9rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.estudio-bios {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.estudio-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.estudio-section-title {
+  font-family: "Arial", sans-serif;
+  font-size: 1.12rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #333;
+}
+
+.estudio-section-sub {
+  font-family: "Arial", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: #5a5a5a;
+  text-transform: uppercase;
+}
+
+.estudio-bio {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.55rem 0.65rem 0.6rem;
+  background: rgba(255, 255, 255, 0.34);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.estudio-bio-name {
+  font-family: "Arial", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #333;
+  margin: 0;
+}
+
+.estudio-bio-text {
+  font-family: "Arial", sans-serif;
+  font-size: 0.81rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #333;
+  margin: 0;
+  text-align: justify;
+  overflow: visible;
+  padding-right: 0;
+}
+
+.estudio-text::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.estudio-text {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.estudio-photo {
+  flex: 1;
+  margin: 0.9rem 0 0;
+  overflow: hidden;
+}
+
+.estudio-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .estudio-page {
+    height: auto;
+    overflow: auto;
+  }
+
+  .estudio-layout {
+    position: static;
+    flex-direction: column;
+    padding-top: calc(33vh + 2rem);
+    padding-bottom: 3rem;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    gap: 0;
+  }
+
+  .estudio-text {
+    flex: none;
+    padding: 1.5rem 1rem;
+    gap: 1.5rem;
+    overflow: visible;
+  }
+
+  .estudio-bios {
+    gap: 1rem;
+  }
+
+  .estudio-bio {
+    display: flex;
+  }
+
+  .estudio-bio-text {
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  .estudio-photo {
+    margin: 0 1rem 2rem;
+    height: 70vw;
+  }
+
+}
+
