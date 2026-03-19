@@ -488,6 +488,18 @@ body {
   width: 300vw;
 }
 
+.project-page::after {
+  content: "";
+  position: fixed;
+  top: 33vh;
+  right: 0;
+  width: 2rem;
+  bottom: 0;
+  background: #e5e4e4;
+  pointer-events: none;
+  z-index: 1500;
+}
+
 .project-header-bar {
   position: fixed;
   top: 0;
@@ -593,6 +605,74 @@ body {
   object-fit: cover;
 }
 
+.project-gallery .project-image {
+  transition: transform 0.22s ease, filter 0.22s ease;
+}
+
+.project-gallery .project-image:hover {
+  transform: scale(1.015);
+  filter: brightness(1.04);
+}
+
+.project-gallery-sequence {
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.project-gallery-sequence .project-image-panel {
+  flex: 0 0 30vw;
+  min-width: 300px;
+  overflow: hidden;
+  position: relative;
+}
+
+.project-gallery-sequence .project-gallery-note {
+  flex: 0 0 30vw;
+  min-width: 300px;
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.project-lightbox {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.78);
+  z-index: 5000;
+}
+
+.project-lightbox.is-open {
+  display: flex;
+}
+
+.project-lightbox-image {
+  max-width: min(92vw, 1700px);
+  max-height: 90vh;
+  object-fit: contain;
+  box-shadow: 0 12px 38px rgba(0, 0, 0, 0.45);
+}
+
+.project-lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border: 0;
+  background: rgba(255, 255, 255, 0.92);
+  color: #111;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
   .project-description {
     position: static;
@@ -610,6 +690,17 @@ body {
     bottom: 1rem;
     grid-template-columns: 1fr;
     grid-template-rows: 2fr 1fr;
+  }
+
+  .project-gallery-sequence {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .project-gallery-sequence .project-image-panel,
+  .project-gallery-sequence .project-gallery-note {
+    min-width: 0;
   }
 }
 

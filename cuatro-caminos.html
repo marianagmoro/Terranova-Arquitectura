@@ -32,31 +32,108 @@
       <span class="project-title-meta">A Coruña 2020</span>
     </div>
 
-    <div class="project-description">
+        <div class="project-description scroll-vertical-zone">
       <p class="project-text">
-        Proyecto de rehabilitación interior con una propuesta contemporánea y materiales de alta durabilidad.
+        Texto de prueba: esta es una descripción provisional larga para validar maquetación, jerarquía tipográfica y comportamiento del scroll en la columna izquierda del proyecto.
       </p>
     </div>
 
-    <div class="project-gallery">
-      <div class="project-image-large">
+        <div class="project-gallery project-gallery-sequence">
+      <div class="project-image-panel">
         <img
           src="assets/img/proyectos/cuatro-caminos/portada.jpg"
-          alt="Cuatro Caminos"
+          alt="Cuatro Caminos - Vista 1"
           class="project-image"
         />
       </div>
-      <div class="project-image-small">
+      <div class="project-image-panel">
         <img
           src="assets/img/proyectos/cuatro-caminos/portada.jpg"
-          alt="Cuatro Caminos - Interior"
+          alt="Cuatro Caminos - Vista 2"
+          class="project-image"
+        />
+      </div>
+      <div class="project-image-panel">
+        <img
+          src="assets/img/proyectos/cuatro-caminos/portada.jpg"
+          alt="Cuatro Caminos - Vista 3"
+          class="project-image"
+        />
+      </div>
+      <div class="project-image-panel">
+        <img
+          src="assets/img/proyectos/cuatro-caminos/portada.jpg"
+          alt="Cuatro Caminos - Vista 4"
+          class="project-image"
+        />
+      </div>
+      <div class="project-image-panel">
+        <img
+          src="assets/img/proyectos/cuatro-caminos/portada.jpg"
+          alt="Cuatro Caminos - Vista 5"
+          class="project-image"
+        />
+      </div>
+
+      <div class="project-gallery-note scroll-vertical-zone">
+        <p class="project-text">
+          Texto de prueba: bloque intermedio de descripción dentro de la galería para comprobar lectura, ritmo visual y transición entre la primera y segunda secuencia de imágenes.
+        </p>
+      </div>
+
+      <div class="project-image-panel">
+        <img
+          src="assets/img/proyectos/cuatro-caminos/portada.jpg"
+          alt="Cuatro Caminos - Vista 6"
+          class="project-image"
+        />
+      </div>
+      <div class="project-image-panel">
+        <img
+          src="assets/img/proyectos/cuatro-caminos/portada.jpg"
+          alt="Cuatro Caminos - Vista 7"
+          class="project-image"
+        />
+      </div>
+      <div class="project-image-panel">
+        <img
+          src="assets/img/proyectos/cuatro-caminos/portada.jpg"
+          alt="Cuatro Caminos - Vista 8"
+          class="project-image"
+        />
+      </div>
+      <div class="project-image-panel">
+        <img
+          src="assets/img/proyectos/cuatro-caminos/portada.jpg"
+          alt="Cuatro Caminos - Vista 9"
+          class="project-image"
+        />
+      </div>
+      <div class="project-image-panel">
+        <img
+          src="assets/img/proyectos/cuatro-caminos/portada.jpg"
+          alt="Cuatro Caminos - Vista 10"
           class="project-image"
         />
       </div>
     </div>
-  <script>
+    <script>
     // Convertir scroll vertical en horizontal para elementos debajo de la línea
-    const projectDescription = document.querySelector(".project-description");
+    const scrollVerticalZones = Array.from(document.querySelectorAll(".scroll-vertical-zone"));
+    const projectGallerySequence = document.querySelector(".project-gallery-sequence");
+
+    function alignHorizontalCanvasToGalleryEnd() {
+      if (!projectGallerySequence) {
+        return;
+      }
+
+      const galleryLeft = projectGallerySequence.offsetLeft;
+      const galleryWidth = projectGallerySequence.scrollWidth;
+      const rightGutter = 32; // 2rem
+      const requiredWidth = Math.ceil(galleryLeft + galleryWidth + rightGutter);
+
+      document.body.style.width = Math.max(requiredWidth, window.innerWidth) + "px";
+    }
 
     document.addEventListener("wheel", function (e) {
       const lineHeight = window.innerHeight * 0.33 + 64; // 33vh + 4rem
@@ -66,9 +143,10 @@
         return;
       }
 
-      if (projectDescription && projectDescription.contains(e.target)) {
-        const canScrollDown = projectDescription.scrollTop + projectDescription.clientHeight < projectDescription.scrollHeight;
-        const canScrollUp = projectDescription.scrollTop > 0;
+      const activeVerticalZone = scrollVerticalZones.find((zone) => zone.contains(e.target));
+      if (activeVerticalZone) {
+        const canScrollDown = activeVerticalZone.scrollTop + activeVerticalZone.clientHeight < activeVerticalZone.scrollHeight;
+        const canScrollUp = activeVerticalZone.scrollTop > 0;
 
         if ((e.deltaY > 0 && canScrollDown) || (e.deltaY < 0 && canScrollUp)) {
           return;
@@ -78,38 +156,15 @@
       e.preventDefault();
       window.scrollBy(e.deltaY, 0);
     }, { passive: false });
-    function fitProjectPair() {
-      const gallery = document.querySelector(".project-gallery");
-      const largeImage = document.querySelector(".project-image-large .project-image");
-      const smallImage = document.querySelector(".project-image-small .project-image");
 
-      if (!gallery || !largeImage || !smallImage) {
+    function initGalleryWidthAlignment() {
+      if (!projectGallerySequence) {
         return;
       }
 
-      const r1 = largeImage.naturalWidth / largeImage.naturalHeight;
-      const r2 = smallImage.naturalWidth / smallImage.naturalHeight;
-      if (!isFinite(r1) || !isFinite(r2) || r1 <= 0 || r2 <= 0) {
-        return;
-      }
-
-      const styles = window.getComputedStyle(gallery);
-      const gap = parseFloat(styles.columnGap || styles.gap || "16") || 16;
-      const availableWidth = gallery.clientWidth;
-      const availableHeight = gallery.clientHeight;
-
-      if (!availableWidth || !availableHeight) {
-        return;
-      }
-
-      const idealHeight = (availableWidth - gap) / (r1 + r2);
-      const fittedHeight = Math.min(idealHeight, availableHeight);
-      gallery.style.setProperty("--pair-height", `${fittedHeight}px`);
-    }
-
-    function initProjectPairFit() {
-      const images = Array.from(document.querySelectorAll(".project-gallery .project-image"));
+      const images = Array.from(projectGallerySequence.querySelectorAll(".project-image"));
       if (!images.length) {
+        alignHorizontalCanvasToGalleryEnd();
         return;
       }
 
@@ -117,7 +172,7 @@
       const done = () => {
         pending -= 1;
         if (pending <= 0) {
-          fitProjectPair();
+          alignHorizontalCanvasToGalleryEnd();
         }
       };
 
@@ -130,11 +185,59 @@
         }
       });
 
-      window.addEventListener("resize", fitProjectPair);
-      window.addEventListener("load", fitProjectPair);
+      window.addEventListener("resize", alignHorizontalCanvasToGalleryEnd);
+      window.addEventListener("load", alignHorizontalCanvasToGalleryEnd);
     }
 
-    initProjectPairFit();
+    initGalleryWidthAlignment();
+    function initProjectLightbox() {
+      let lightbox = document.querySelector(".project-lightbox");
+      if (!lightbox) {
+        lightbox = document.createElement("div");
+        lightbox.className = "project-lightbox";
+        lightbox.innerHTML = `
+          <button class="project-lightbox-close" type="button" aria-label="Cerrar imagen">×</button>
+          <img class="project-lightbox-image" alt="Imagen ampliada" />
+        `;
+        document.body.appendChild(lightbox);
+      }
+
+      const lightboxImage = lightbox.querySelector(".project-lightbox-image");
+      const closeBtn = lightbox.querySelector(".project-lightbox-close");
+
+      function closeLightbox() {
+        lightbox.classList.remove("is-open");
+        document.body.style.overflow = "";
+      }
+
+      function openLightbox(src, altText) {
+        lightboxImage.src = src;
+        lightboxImage.alt = altText || "Imagen ampliada";
+        lightbox.classList.add("is-open");
+        document.body.style.overflow = "hidden";
+      }
+
+      document.addEventListener("click", function (e) {
+        const image = e.target.closest(".project-gallery .project-image");
+        if (image) {
+          e.preventDefault();
+          openLightbox(image.currentSrc || image.src, image.alt);
+          return;
+        }
+
+        if (e.target === lightbox || e.target === closeBtn) {
+          closeLightbox();
+        }
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && lightbox.classList.contains("is-open")) {
+          closeLightbox();
+        }
+      });
+    }
+
+    initProjectLightbox();
   </script>
   </body>
 </html>
