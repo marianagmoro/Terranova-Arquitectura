@@ -335,7 +335,7 @@ body {
 }
 
 .gallery-item {
-  aspect-ratio: 1080/1240;
+  height: calc(62vh - 4rem);
   overflow: hidden;
   position: relative;
   opacity: 1;
@@ -437,19 +437,14 @@ body {
 }
 
 .project-info {
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-template-areas:
-    "name name"
-    "location year";
-  align-items: baseline;
-  column-gap: 0.35rem;
-  row-gap: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
   text-align: center;
 }
 
 .project-name {
-  grid-area: name;
   color: #111;
   font-family: "Arial", sans-serif;
   font-weight: 700;
@@ -457,8 +452,13 @@ body {
   letter-spacing: -0.02em;
 }
 
+.project-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+}
+
 .project-location {
-  grid-area: location;
   color: #555;
   font-family: "Arial", sans-serif;
   font-weight: 400;
@@ -468,7 +468,6 @@ body {
 }
 
 .project-year {
-  grid-area: year;
   color: #555;
   font-family: "Arial", sans-serif;
   font-weight: 400;
@@ -556,7 +555,7 @@ body {
 
 .project-page .project-title-meta {
   margin-top: 0;
-  font-size: 0.78rem;
+  font-size: 0.9rem;
   letter-spacing: 0.01em;
 }
 
@@ -729,23 +728,22 @@ body {
 
 .estudio-layout {
   position: absolute;
-  top: 33vh;
+  top: calc(33vh + 4rem);
   left: 2rem;
   right: 2rem;
-  bottom: 2rem;
+  bottom: 4rem;
   display: flex;
   gap: 1rem;
 }
 
 .estudio-text {
   flex: 0 0 35vw;
-  padding: 0.9rem 0.8rem 0.9rem 0;
+  padding: 0 0.25rem 0 0;
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
   overflow-x: hidden;
   overflow-y: auto;
-  padding-right: 0.25rem;
 }
 
 .estudio-bios {
@@ -820,7 +818,7 @@ body {
 
 .estudio-photo {
   flex: 1;
-  margin: 0.9rem 0 0;
+  margin: 0;
   overflow: hidden;
 }
 
