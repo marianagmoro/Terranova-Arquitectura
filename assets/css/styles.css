@@ -875,3 +875,184 @@ body {
 
 }
 
+/* ==================== CONTACTO PAGE ==================== */
+.contacto-page {
+  background: #e5e4e4;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.contacto-page .home-logo {
+  position: static;
+  z-index: auto;
+}
+
+.contacto-page .home-nav {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  z-index: auto;
+}
+
+.contacto-page .horizontal-line {
+  display: none;
+}
+
+.contacto-layout {
+  position: absolute;
+  top: 33vh;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1.25rem 2rem;
+  display: grid;
+  grid-template-columns: minmax(280px, 0.9fr) minmax(320px, 1.1fr);
+  gap: 1.25rem;
+  align-items: stretch;
+  min-height: 0;
+}
+
+.contacto-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-width: 32rem;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 0.2rem;
+}
+
+.contacto-title {
+  font-family: "Arial", sans-serif;
+  font-size: 1.12rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #333;
+}
+
+.contacto-text {
+  font-family: "Arial", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.55;
+  color: #333;
+  margin: 0;
+}
+
+.contacto-link {
+  color: #333;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.contacto-form-wrapper {
+  background: rgba(255, 255, 255, 0.38);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0.75rem;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.contacto-form {
+  display: grid;
+  grid-template-rows: repeat(6, auto) minmax(0, 1fr) auto;
+  gap: 0.45rem;
+  height: 100%;
+  min-height: 0;
+}
+
+.contacto-label {
+  font-family: "Arial", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #4a4a4a;
+}
+
+.contacto-input,
+.contacto-textarea {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  background: rgba(255, 255, 255, 0.75);
+  color: #333;
+  font-family: "Arial", sans-serif;
+  font-size: 0.84rem;
+  padding: 0.5rem 0.6rem;
+  outline: none;
+}
+
+.contacto-textarea {
+  resize: none;
+  min-height: 0;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.contacto-input:focus,
+.contacto-textarea:focus {
+  border-color: #555;
+}
+
+.contacto-button {
+  justify-self: start;
+  border: 1px solid #333;
+  background: transparent;
+  color: #333;
+  font-family: "Arial", sans-serif;
+  font-size: 0.74rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.48rem 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.contacto-button:hover {
+  background: #333;
+  color: #e5e4e4;
+}
+
+.contacto-info::-webkit-scrollbar,
+.contacto-textarea::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.contacto-info,
+.contacto-textarea {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (max-width: 900px) {
+  .contacto-page {
+    height: auto;
+    overflow: auto;
+  }
+
+  .contacto-layout {
+    position: static;
+    grid-template-columns: 1fr;
+    padding: 1.25rem 1rem 2rem;
+    gap: 1.25rem;
+  }
+
+  .contacto-info {
+    max-width: none;
+    overflow: visible;
+  }
+
+  .contacto-form {
+    grid-template-rows: none;
+    height: auto;
+  }
+
+  .contacto-textarea {
+    min-height: 7rem;
+    height: auto;
+  }
+}
+

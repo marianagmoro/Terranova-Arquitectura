@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Contacto - TerraNova Arquitectura</title>
+		<link rel="stylesheet" href="assets/css/styles.css" />
+	</head>
+	<body class="contacto-page">
+		<header class="project-header-bar">
+			<div class="project-header-inner">
+				<div class="home-logo">
+					<a href="index.html">
+						<img
+							src="assets/img/ui/terranova2.png"
+							alt="Terranova Arquitectura"
+							class="home-brand-logo"
+						/>
+					</a>
+				</div>
+
+				<nav class="home-nav">
+					<a href="proyectos.html" class="nav-link">proyectos</a>
+					<a href="estudio.html" class="nav-link">estudio</a>
+					<a href="contacto.html" class="nav-link">contacto</a>
+				</nav>
+			</div>
+		</header>
+
+		<main class="contacto-layout">
+			<section class="contacto-info">
+				<span class="contacto-title">Contacto</span>
+				<p class="contacto-text">
+					Si quieres hablar de un proyecto, una reforma o una colaboración, puedes escribirnos
+					desde este formulario.
+				</p>
+				<p class="contacto-text">
+					También puedes contactarnos por correo en
+					<a href="mailto:info@terranovaarquitectura.com" class="contacto-link"
+						>info@terranovaarquitectura.com</a
+					>.
+				</p>
+			</section>
+
+			<section class="contacto-form-wrapper">
+				<form class="contacto-form" action="#" method="post">
+					<label class="contacto-label" for="nombre">Nombre</label>
+					<input class="contacto-input" type="text" id="nombre" name="nombre" required />
+
+					<label class="contacto-label" for="email">Email</label>
+					<input class="contacto-input" type="email" id="email" name="email" required />
+
+					<label class="contacto-label" for="asunto">Asunto</label>
+					<input class="contacto-input" type="text" id="asunto" name="asunto" required />
+
+					<label class="contacto-label" for="mensaje">Mensaje</label>
+					<textarea
+						class="contacto-textarea"
+						id="mensaje"
+						name="mensaje"
+						rows="4"
+						required
+					></textarea>
+
+					<button class="contacto-button" type="submit">Enviar</button>
+				</form>
+			</section>
+		</main>
+	</body>
+</html>
