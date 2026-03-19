@@ -231,7 +231,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Reset filtro al clicar en "Proyectos"
-    if (e.target.id === "projects-title") {
+    if (e.target.id === "projects-reset") {
+      e.preventDefault();
       resetGalleryFilter();
     }
   });

@@ -266,18 +266,18 @@ body {
 }
 
 .projects-layout {
-  display: flex;
-  align-items: flex-start;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1rem;
   margin-top: calc(33vh + 4rem);
   padding: 0 2rem 4rem;
 }
 
 .projects-sidebar {
-  flex: 0 0 max(190px, 20vw);
+  grid-column: 1;
   position: sticky;
-  top: calc(33vh + 6rem);
-  margin-top: 2.1rem;
+  top: calc(33vh + 4rem);
+  height: fit-content;
 }
 
 .years-column {
@@ -287,9 +287,8 @@ body {
 }
 
 .projects-content {
-  flex: 1;
-  min-width: 0;
-  margin-left: 0.8rem;
+  grid-column: 2 / 5;
+  width: 100%;
 }
 
 .year-link {
@@ -300,6 +299,12 @@ body {
   font-size: 0.9rem;
   letter-spacing: -0.02em;
   transition: color 0.3s ease;
+}
+
+.projects-link {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 1rem;
 }
 
 .year-link:hover {
@@ -330,8 +335,6 @@ body {
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   width: 100%;
-  max-width: 95%;
-  margin-left: auto;
 }
 
 .gallery-item {
