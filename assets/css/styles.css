@@ -499,6 +499,18 @@ body {
   z-index: 1500;
 }
 
+.project-page::before {
+  content: "";
+  position: fixed;
+  top: 33vh;
+  left: 0;
+  width: 2rem;
+  bottom: 0;
+  background: #e5e4e4;
+  pointer-events: none;
+  z-index: 1500;
+}
+
 .project-header-bar {
   position: fixed;
   top: 0;
