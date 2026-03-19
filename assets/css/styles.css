@@ -537,7 +537,7 @@ body {
   right: 2rem;
   bottom: 0;
   height: 1px;
-  background: #8f8f8f;
+  background: #3d3d3d;
 }
 
 .project-page .home-logo {
@@ -563,9 +563,9 @@ body {
 }
 
 .project-page .projects-text {
-  font-size: 1.12rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 
 .project-page .project-title-meta {
@@ -886,9 +886,9 @@ body {
 
 .estudio-section-title {
   font-family: "Arial", sans-serif;
-  font-size: 1.12rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   color: #333;
 }
 
@@ -923,7 +923,7 @@ body {
 
 .estudio-bio-text {
   font-family: "Arial", sans-serif;
-  font-size: 0.81rem;
+  font-size: 0.9rem;
   font-weight: 300;
   line-height: 1.5;
   color: #333;
@@ -1048,9 +1048,9 @@ body {
 
 .contacto-title {
   font-family: "Arial", sans-serif;
-  font-size: 1.12rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   color: #333;
 }
 
