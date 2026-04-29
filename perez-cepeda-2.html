@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pérez Cepeda 2 - TerraNova Arquitectura</title>
+    <title>Pérez Cepeda 2 - Terranøva Arquitectura</title>
     <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
   <body class="project-page">
@@ -13,7 +13,7 @@
           <a href="index.html">
             <img
               src="assets/img/ui/terranova2.png"
-              alt="Terranova Arquitectura"
+              alt="Terranøva Arquitectura"
               class="home-brand-logo"
             />
           </a>
@@ -77,11 +77,7 @@ La propuesta que nos planteamos fue la de la serenidad como punto de partida, y 
 
       <div class="project-gallery-note scroll-vertical-zone">
         <p class="project-text">
-Esa idea de "blancos cálidos" es una constante en todo el diseño del interiorismo. El secreto está en evitar el blanco puro. Trabajamos con una paleta de blancos rotos que dialogan entre sí a través de matices cálidos. En este apartamento, esa base neutra se convierte en un telón de fondo tranquilo sobre el que destacan los acentos: la madera de roble, la piedra gris de las encimeras, el acero inoxidable, el verde de las plantas, el rojo de los textiles, etc…
-La cocina, uno de los espacios más exigentes en términos de diseño, se resuelve con precisión casi quirúrgica, pensado milimétricamente para alcanzar el máximo almacenamiento. Nosotros diseñamos siempre cocinas a medida con nuestros carpinteros de confianza, lo que nos permite un control absoluto del espacio y del lenguaje material.
-Algo similar ocurre en los dormitorios, donde la optimización del espacio es también fundamental. La carpintería, de nuevo, actúa como herramienta estructural del diseño. El vestidor en roble que da paso al baño de la habitación principal es otra de las claves del proyecto.
-Finalmente, los dos baños se conciben como un espacio funcional, sí, pero abordado desde una mirada sensible que lo transforma en un refugio de desconexión y relajación, realizados en microcemento blanco cálido, en sintonía con la atmósfera que recorre toda la vivienda.        </p>
-      </div>
+La paleta parte de blancos rotos con matices cálidos que actúan como fondo neutro sobre el que destacan la madera de roble, la piedra, el acero y los textiles. La cocina, diseñada a medida con carpinteros de confianza, resuelve con precisión el almacenamiento sin sacrificar el lenguaje material. Los dormitorios siguen la misma lógica: la carpintería como herramienta estructural, con el vestidor en roble como pieza central. Los baños, revestidos en microcemento blanco cálido, cierran la vivienda como espacios de desconexión coherentes con la atmósfera del conjunto.      </div>
 
       <div class="project-image-panel">
         <img
@@ -123,6 +119,11 @@ Finalmente, los dos baños se conciben como un espacio funcional, sí, pero abor
     // Convertir scroll vertical en horizontal para elementos debajo de la línea
     const scrollVerticalZones = Array.from(document.querySelectorAll(".scroll-vertical-zone"));
     const projectGallerySequence = document.querySelector(".project-gallery-sequence");
+    const mobileMediaQuery = window.matchMedia("(max-width: 768px)");
+
+    function usesMobileProjectLayout() {
+      return mobileMediaQuery.matches;
+    }
 
     function classifyGalleryPanelsByOrientation() {
       if (!projectGallerySequence) {
@@ -153,6 +154,11 @@ Finalmente, los dos baños se conciben como un espacio funcional, sí, pero abor
         return;
       }
 
+      if (usesMobileProjectLayout()) {
+        document.body.style.width = "";
+        return;
+      }
+
       const galleryLeft = projectGallerySequence.offsetLeft;
       const galleryWidth = projectGallerySequence.scrollWidth;
       const rightGutter = 32; // 2rem
@@ -162,6 +168,10 @@ Finalmente, los dos baños se conciben como un espacio funcional, sí, pero abor
     }
 
     document.addEventListener("wheel", function (e) {
+      if (usesMobileProjectLayout()) {
+        return;
+      }
+
       const lineHeight = window.innerHeight * 0.33 + 64; // 33vh + 4rem
       const isBelowHeader = e.clientY > lineHeight;
 
@@ -214,6 +224,12 @@ Finalmente, los dos baños se conciben como un espacio funcional, sí, pero abor
 
       window.addEventListener("resize", alignHorizontalCanvasToGalleryEnd);
       window.addEventListener("load", alignHorizontalCanvasToGalleryEnd);
+
+      if (mobileMediaQuery.addEventListener) {
+        mobileMediaQuery.addEventListener("change", alignHorizontalCanvasToGalleryEnd);
+      } else {
+        mobileMediaQuery.addListener(alignHorizontalCanvasToGalleryEnd);
+      }
     }
 
     initGalleryWidthAlignment();
@@ -266,7 +282,20 @@ Finalmente, los dos baños se conciben como un espacio funcional, sí, pero abor
 
     initProjectLightbox();
   </script>
+  
+  <footer class="site-footer">
+    <div class="footer-line"></div>
+    <div class="footer-content">
+      <div class="footer-left">
+        <span>© 2026 Terranøva Arquitectura</span>
+      </div>
+      <div class="footer-center">
+        <span>A Coruña</span>
+      </div>
+      <div class="footer-right">
+        <span>Todos los derechos reservados</span>
+      </div>
+    </div>
+  </footer>
   </body>
 </html>
-
-

@@ -240,17 +240,35 @@ document.addEventListener("DOMContentLoaded", function () {
   // Flecha scroll
   const scrollArrow = document.getElementById("scroll-arrow");
   if (scrollArrow) {
-    window.addEventListener("scroll", function () {
+    const footer = document.querySelector(".site-footer");
+    const scrollArrowBaseOffset = 32;
+
+    function updateScrollArrowState() {
       if (window.scrollY > 80) {
         scrollArrow.classList.add("visible");
       } else {
         scrollArrow.classList.remove("visible");
       }
-    });
+
+      if (!footer) {
+        scrollArrow.style.bottom = scrollArrowBaseOffset + "px";
+        return;
+      }
+
+      const footerRect = footer.getBoundingClientRect();
+      const overlap = Math.max(0, window.innerHeight - footerRect.top);
+      scrollArrow.style.bottom = scrollArrowBaseOffset + overlap + "px";
+    }
+
+    window.addEventListener("scroll", updateScrollArrowState);
+    window.addEventListener("resize", updateScrollArrowState);
+    window.addEventListener("load", updateScrollArrowState);
 
     scrollArrow.addEventListener("click", function () {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
+
+    updateScrollArrowState();
   }
 
   if (homePage && gallery) {

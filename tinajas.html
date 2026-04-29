@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tinajas - TerraNova Arquitectura</title>
+    <title>Tinajas - Terranøva Arquitectura</title>
     <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
   <body class="project-page">
@@ -13,7 +13,7 @@
           <a href="index.html">
             <img
               src="assets/img/ui/terranova2.png"
-              alt="Terranova Arquitectura"
+              alt="Terranøva Arquitectura"
               class="home-brand-logo"
             />
           </a>
@@ -123,6 +123,11 @@ Los grandes ventanales garantizan luz natural constante y ventilación cruzada, 
     // Convertir scroll vertical en horizontal para elementos debajo de la línea
     const scrollVerticalZones = Array.from(document.querySelectorAll(".scroll-vertical-zone"));
     const projectGallerySequence = document.querySelector(".project-gallery-sequence");
+    const mobileMediaQuery = window.matchMedia("(max-width: 768px)");
+
+    function usesMobileProjectLayout() {
+      return mobileMediaQuery.matches;
+    }
 
     function classifyGalleryPanelsByOrientation() {
       if (!projectGallerySequence) {
@@ -153,6 +158,11 @@ Los grandes ventanales garantizan luz natural constante y ventilación cruzada, 
         return;
       }
 
+      if (usesMobileProjectLayout()) {
+        document.body.style.width = "";
+        return;
+      }
+
       const galleryLeft = projectGallerySequence.offsetLeft;
       const galleryWidth = projectGallerySequence.scrollWidth;
       const rightGutter = 32; // 2rem
@@ -162,6 +172,10 @@ Los grandes ventanales garantizan luz natural constante y ventilación cruzada, 
     }
 
     document.addEventListener("wheel", function (e) {
+      if (usesMobileProjectLayout()) {
+        return;
+      }
+
       const lineHeight = window.innerHeight * 0.33 + 64; // 33vh + 4rem
       const isBelowHeader = e.clientY > lineHeight;
 
@@ -214,6 +228,12 @@ Los grandes ventanales garantizan luz natural constante y ventilación cruzada, 
 
       window.addEventListener("resize", alignHorizontalCanvasToGalleryEnd);
       window.addEventListener("load", alignHorizontalCanvasToGalleryEnd);
+
+      if (mobileMediaQuery.addEventListener) {
+        mobileMediaQuery.addEventListener("change", alignHorizontalCanvasToGalleryEnd);
+      } else {
+        mobileMediaQuery.addListener(alignHorizontalCanvasToGalleryEnd);
+      }
     }
 
     initGalleryWidthAlignment();
@@ -266,7 +286,20 @@ Los grandes ventanales garantizan luz natural constante y ventilación cruzada, 
 
     initProjectLightbox();
   </script>
+  
+  <footer class="site-footer">
+    <div class="footer-line"></div>
+    <div class="footer-content">
+      <div class="footer-left">
+        <span>© 2026 Terranøva Arquitectura</span>
+      </div>
+      <div class="footer-center">
+        <span>A Coruña</span>
+      </div>
+      <div class="footer-right">
+        <span>Todos los derechos reservados</span>
+      </div>
+    </div>
+  </footer>
   </body>
 </html>
-
-
